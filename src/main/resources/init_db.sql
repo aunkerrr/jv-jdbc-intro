@@ -1,0 +1,11 @@
+DROP TABLE if EXISTS books;
+
+CREATE TABLE books (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  isbn VARCHAR(50) UNIQUE,
+  published_year INT,
+  price NUMERIC(10, 2)
+);
+
