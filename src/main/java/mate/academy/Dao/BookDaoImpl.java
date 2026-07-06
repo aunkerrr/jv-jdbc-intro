@@ -23,7 +23,7 @@ public class BookDaoImpl implements BookDao {
             preparedStatement.setString(2, book.getAuthor());
             preparedStatement.setString(3, book.getIsbn());
             preparedStatement.setObject(4, book.getPublished_year());
-            preparedStatement.setDouble(5, book.getPrice());
+            preparedStatement.setObject(5, book.getPrice());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -36,6 +36,7 @@ public class BookDaoImpl implements BookDao {
                 Long id = resultSet.getObject(1, Long.class);
                 book.setId(id);
             }
+
         } catch (SQLException e) {
             throw new RuntimeException("Can't insert book into DB", e);
         }
@@ -60,7 +61,7 @@ public class BookDaoImpl implements BookDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Can't find Book by ID", e);
+            throw new RuntimeException("Can't find Book by ID: " + id, e);
         }
 
         return Optional.empty();
@@ -97,7 +98,7 @@ public class BookDaoImpl implements BookDao {
             preparedStatement.setString(2, book.getAuthor());
             preparedStatement.setString(3, book.getIsbn());
             preparedStatement.setObject(4, book.getPublished_year());
-            preparedStatement.setDouble(5, book.getPrice());
+            preparedStatement.setObject(5, book.getPrice());
             preparedStatement.setObject(6, book.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
@@ -107,7 +108,7 @@ public class BookDaoImpl implements BookDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Can't insert book into DB", e);
+            throw new RuntimeException("Can't update book into DB: " + book.getId(), e);
         }
         return book;
     }
@@ -122,25 +123,21 @@ public class BookDaoImpl implements BookDao {
             preparedStatement.setLong(1, id);
 
             int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows <= 0) {
-                return false;
-            }
+            return affectedRows > 0;
 
         } catch (SQLException e) {
-            throw new  RuntimeException("Can't delete Book by ID", e);
+            throw new  RuntimeException("Can't delete Book by ID: " + id, e);
         }
-
-        return true;
     }
 
     private Book mapResultSetToBook(ResultSet resultSet) throws SQLException {
         Book book = new Book();
-        book.setId(resultSet.getLong("id"));
+        book.setId(resultSet.getObject("id", Long.class));
         book.setTitle(resultSet.getString("title"));
         book.setAuthor(resultSet.getString("author"));
         book.setIsbn(resultSet.getString("isbn"));
-        book.setPublished_year(resultSet.getInt("published_year"));
-        book.setPrice(resultSet.getFloat("price"));
+        book.setPublished_year(resultSet.getObject("published_year", Integer.class));
+        book.setPrice(resultSet.getObject("price", Float.class));
         return book;
     }
 }
