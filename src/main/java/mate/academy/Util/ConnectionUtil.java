@@ -16,7 +16,7 @@ public class ConnectionUtil {
         DataBaseProperties.put("password", "kali");
 
         try {
-            Class.forName("org.jdbc.mariadb.Driver");
+            Class.forName("org.mariadb.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can not load JDBC driver", e);
         }
