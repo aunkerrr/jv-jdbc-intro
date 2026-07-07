@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-    private static final String DB_URL = "jdbc:mariadb:/localhost:3306/test";
+    private static final String DB_URL = "jdbc:mariadb://localhost:3306/test";
 
     private static Properties DataBaseProperties = null;
 
     static {
         DataBaseProperties = new Properties();
-        DataBaseProperties.put("user", " root");
+        DataBaseProperties.put("user", "root");
         DataBaseProperties.put("password", "kali");
 
         try {
