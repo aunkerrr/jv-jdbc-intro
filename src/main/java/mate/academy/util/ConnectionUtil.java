@@ -22,7 +22,7 @@ public class ConnectionUtil {
         }
     }
 
-    public static Connection getConncetion() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, DataBaseProperties);
     }
 }

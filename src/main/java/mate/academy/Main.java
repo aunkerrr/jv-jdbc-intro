@@ -25,7 +25,7 @@ public class Main {
         System.out.println("\n2. Testing READ (findById): ");
         Optional<Book> foundBook = bookDao.findById(savedbBook.getId());
         foundBook.ifPresent(book -> System.out.println("Found in db: "
-                + foundBook));
+                + book));
 
         System.out.println("\n3. Testing UPDATE operation: ");
         savedbBook.setPrice(45.50f);
