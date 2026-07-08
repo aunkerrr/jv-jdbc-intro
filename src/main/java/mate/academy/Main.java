@@ -1,5 +1,6 @@
 package mate.academy;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import mate.academy.dao.BookDao;
@@ -13,10 +14,7 @@ public class Main {
         System.out.println("1. Testing CREATE operation: ");
         Book newBook = new Book();
         newBook.setTitle("Clean Code");
-        newBook.setAuthor("Robert C. Martin");
-        newBook.setIsbn("978-0132350884");
-        newBook.setPublishedYear(2008);
-        newBook.setPrice(35.50f);
+        newBook.setPrice(BigDecimal.valueOf(35.50)); // Заменили float на BigDecimal
 
         BookDao bookDao = (BookDao) injector.getInstance(BookDao.class);
         Book savedbBook = bookDao.create(newBook);
@@ -28,7 +26,7 @@ public class Main {
                 + book));
 
         System.out.println("\n3. Testing UPDATE operation: ");
-        savedbBook.setPrice(45.50f);
+        savedbBook.setPrice(BigDecimal.valueOf(45.50));
         savedbBook.setTitle("Clean Code (Updated Edition)");
         bookDao.update(savedbBook);
         System.out.println("Price and name successfully updated! For book: " + savedbBook);

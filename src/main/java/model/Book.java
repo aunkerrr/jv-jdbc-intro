@@ -1,14 +1,15 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Book {
     private Long id;
     private String title;
-    private String author;
-    private String isbn;
-    private int publishedYear;
-    private float price;
+    private BigDecimal price;
+
+    public Book() {
+    }
 
     public Long getId() {
         return id;
@@ -26,36 +27,20 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public int getPublishedYear() {
-        return publishedYear;
-    }
-
-    public void setPublishedYear(int publishedYear) {
-        this.publishedYear = publishedYear;
-    }
-
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{id="
+                + id + ", title='"
+                + title + "', price="
+                + price + '}';
     }
 
     @Override
@@ -63,28 +48,14 @@ public class Book {
         if (!(o instanceof Book book)) {
             return false;
         }
-        return publishedYear == book.publishedYear
-                && Float.compare(price, book.price)
-                == 0 && Objects.equals(id, book.id)
+
+        return Objects.equals(id, book.id)
                 && Objects.equals(title, book.title)
-                && Objects.equals(author, book.author)
-                && Objects.equals(isbn, book.isbn);
+                && Objects.equals(price, book.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, publishedYear, price);
-    }
-
-    @Override
-    public String toString() {
-        return "Book{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", author='" + author + '\''
-                + ", isbn='" + isbn + '\''
-                + ", publishedYear=" + publishedYear
-                + ", price=" + price
-                + '}';
+        return Objects.hash(id, title, price);
     }
 }
