@@ -5,7 +5,7 @@ CREATE TABLE book (
   title VARCHAR(255) NOT NULL,
   author VARCHAR(255) NOT NULL,
   isbn VARCHAR(50) UNIQUE,
-  published_year INT,
+  publishedYear INT,
   price NUMERIC(10, 2)
 );
 

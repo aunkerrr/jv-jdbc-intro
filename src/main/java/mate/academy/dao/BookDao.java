@@ -1,9 +1,8 @@
-package mate.academy.Dao;
-
-import Model.Book;
+package mate.academy.dao;
 
 import java.util.List;
 import java.util.Optional;
+import model.Book;
 
 public interface BookDao {
     Book create(Book book);

@@ -1,26 +1,24 @@
 package mate.academy;
 
-import Model.Book;
-import mate.academy.Dao.BookDao;
-import mate.academy.lib.Injector;
-
 import java.util.List;
 import java.util.Optional;
+import mate.academy.dao.BookDao;
+import mate.academy.lib.Injector;
+import model.Book;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
-        BookDao bookDao = (BookDao) injector.getInstance(BookDao.class);
-
         System.out.println("1. Testing CREATE operation: ");
         Book newBook = new Book();
         newBook.setTitle("Clean Code");
         newBook.setAuthor("Robert C. Martin");
         newBook.setIsbn("978-0132350884");
-        newBook.setPublished_year(2008);
+        newBook.setPublishedYear(2008);
         newBook.setPrice(35.50f);
 
+        BookDao bookDao = (BookDao) injector.getInstance(BookDao.class);
         Book savedbBook = bookDao.create(newBook);
         System.out.println("Saved Book: " + savedbBook);
 
